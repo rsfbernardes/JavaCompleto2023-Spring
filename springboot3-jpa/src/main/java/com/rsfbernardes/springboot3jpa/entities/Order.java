@@ -5,8 +5,11 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rsfbernardes.springboot3jpa.entities.enums.OrderStatusEnum;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,13 +33,17 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id")
 	private User client;
 	
+	@Enumerated(EnumType.STRING)
+	private OrderStatusEnum orderStatusEnum;
+	
 	public Order() {
 	}
 
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, OrderStatusEnum orderStatusEnum, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
+		this.orderStatusEnum = orderStatusEnum;
 		this.client = client;
 	}
 
@@ -54,6 +61,14 @@ public class Order implements Serializable {
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+
+	public OrderStatusEnum getOrderStatusEnum() {
+		return orderStatusEnum;
+	}
+
+	public void setOrderStatusEnum(OrderStatusEnum orderStatusEnum) {
+			this.orderStatusEnum = orderStatusEnum;
 	}
 
 	public User getClient() {
