@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rsfbernardes.springboot3jpa.entities.User;
 import com.rsfbernardes.springboot3jpa.repositories.UserRepository;
+import com.rsfbernardes.springboot3jpa.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 
 	public User findById(Long id) {
 		Optional<User> user = userRepository.findById(id);
-		return user.get();
+		return user.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 
 	public User create(User user) {
@@ -31,7 +32,7 @@ public class UserService {
 	public void delete(Long id) {
 		userRepository.deleteById(id);
 	}
-	
+
 	public User update(Long id, User user) {
 		User userToUpdate = userRepository.getReferenceById(id);
 		updateUser(userToUpdate, user);
