@@ -1,5 +1,6 @@
 package com.rsfbernardes.workshopmongo.resources;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,19 @@ public class PostResource {
 		List<Post> posts = postService.findByTitle(text);
 		return ResponseEntity.ok().body(posts);
 	}
+	
+	@GetMapping(value = "/textSearchBetweenDates")
+	public ResponseEntity<List<Post>> findTextBetweenDates(@RequestParam(value = "text", defaultValue = "") String text, 
+															@RequestParam(value = "startDate", defaultValue = "") String startDate, 
+															@RequestParam(value = "endDate", defaultValue = "") String endDate) {
+		text = URL.decodeParam(text);
+		Date minDate = URL.convertDate(startDate, new Date(0L));
+		Date maxDate = URL.convertDate(endDate, new Date());
+		System.out.println(minDate);
+		System.out.println(maxDate);
+		
+		List<Post> posts = postService.searchPostsByTextBetweenDates(text, minDate, maxDate);
+		return ResponseEntity.ok().body(posts);
+	}
+	
 }

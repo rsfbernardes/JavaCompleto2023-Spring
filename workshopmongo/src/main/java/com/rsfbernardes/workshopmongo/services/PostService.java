@@ -1,5 +1,6 @@
 package com.rsfbernardes.workshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,11 @@ public class PostService {
 	
 	public List<Post> searchByTitle(String text) {
 		return postRepository.searchByTitle(text);
+	}
+	
+	public List<Post> searchPostsByTextBetweenDates(String text, Date startDate, Date endDate){
+		endDate = new Date(endDate.getTime() + 24 * 60 * 60 * 1000); // 24h in milliseconds
+		return postRepository.findTextBetweenData(text, startDate, endDate);
 	}
 	
 }
