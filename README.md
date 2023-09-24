@@ -1,7 +1,7 @@
 # JavaCompleto2023-Spring
 Spring Course from JavaCompleto2023 - DevSuperior Nelio Alves
 
-Repositório com os projetos desenvolvidos no curso utilizando Spring Boot ()
+Repositório com os projetos desenvolvidos no curso utilizando Spring Boot (JPA e MongoDB)
 
 O conteúdo do curso contém programação orientada a objetos utilizando Java, desde o básico, com exemplos bem simples e didáticos, e vai gradualmente avançando, até chegar em tópicos avançados.
 Os tópicos de programação incluem:
